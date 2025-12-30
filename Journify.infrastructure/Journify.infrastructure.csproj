@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Journify.core\Journify.core.csproj" />
+    <ProjectReference Include="..\Journify.service\Journify.service.csproj" />
+  </ItemGroup>
+
 </Project>
