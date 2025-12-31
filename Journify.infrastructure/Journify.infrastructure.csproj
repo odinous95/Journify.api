@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Journify.core\Journify.core.csproj" />
     <ProjectReference Include="..\Journify.service\Journify.service.csproj" />
   </ItemGroup>
