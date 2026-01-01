@@ -13,6 +13,11 @@ builder.Services.AddControllers(
     );
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+// Add In-Memory Database
+builder.Services.AddInMemoryDb();
+builder.Services.AddScoped<IStepRepository, StepRepository>();
+builder.Services.AddTransient<IStepService, StepUsecase>();
+
 
 var app = builder.Build();
 
