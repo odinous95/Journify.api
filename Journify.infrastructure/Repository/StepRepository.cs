@@ -1,0 +1,26 @@
+﻿using Journify.core.Entities;
+using Journify.infrastructure.Data;
+using Journify.service.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace Journify.infrastructure.Repository
+{
+    public class StepRepository : IStepRepository
+    {
+        private readonly AppDbContext _appDbcontext;
+        public StepRepository(AppDbContext appDbContext)
+        {
+            _appDbcontext = appDbContext;
+        }
+        public async Task<Step> AddStepAsync(Step step)
+        {
+            _appDbcontext.Steps.Add(step);
+            await _appDbcontext.SaveChangesAsync();
+            return step;
+        }
+        public async Task<IEnumerable<Step>> GetAllStepsAsync()
+        {
+            return await _appDbcontext.Steps.ToListAsync();
+        }
+    }
+}
