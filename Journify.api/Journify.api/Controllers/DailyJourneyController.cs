@@ -8,8 +8,8 @@ namespace Journify.api.Controllers
     [ApiController]
     public class DailyJourneyController : ControllerBase
     {
-        private readonly IDailyJourneyUsecase _dailyJourneyUsecase;
-        public DailyJourneyController(IDailyJourneyUsecase dailyJourneyUsecase)
+        private readonly IDailyJourneyService _dailyJourneyUsecase;
+        public DailyJourneyController(IDailyJourneyService dailyJourneyUsecase)
         {
             _dailyJourneyUsecase = dailyJourneyUsecase;
         }

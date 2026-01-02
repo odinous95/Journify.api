@@ -2,7 +2,7 @@
 
 namespace Journify.service.Interfaces
 {
-    public interface IDailyJourneyUsecase
+    public interface IDailyJourneyService
     {
         Task<DailyJourney> CreateJourneyAsync(DailyJourney journey);
         Task<IEnumerable<DailyJourney>> GetAllJourneysAsync();

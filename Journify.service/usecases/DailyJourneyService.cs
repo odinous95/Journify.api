@@ -3,10 +3,10 @@ using Journify.service.Interfaces;
 
 namespace Journify.service.usecases
 {
-    public class DailyJourneyUsecase : IDailyJourneyUsecase
+    public class DailyJourneyService : IDailyJourneyService
     {
         private readonly IDailyJourneyRepository _journeyRepository;
-        public DailyJourneyUsecase(IDailyJourneyRepository journeyRepository)
+        public DailyJourneyService(IDailyJourneyRepository journeyRepository)
         {
             _journeyRepository = journeyRepository;
         }

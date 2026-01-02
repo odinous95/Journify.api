@@ -3,10 +3,10 @@ using Journify.service.Interfaces;
 
 namespace Journify.service.usecases
 {
-    public class StepUsecase : IStepService
+    public class StepService : IStepService
     {
         private readonly IStepRepository _stepRepository;
-        public StepUsecase(IStepRepository stepRepository)
+        public StepService(IStepRepository stepRepository)
         {
             _stepRepository = stepRepository;
         }
