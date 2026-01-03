@@ -9,7 +9,13 @@ namespace Journify.infrastructure.Data
         public static void AddInMemoryDb(this IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
-                options.UseInMemoryDatabase("JournifyInMemoryDb"));
+                options.UseInMemoryDatabase("JournifyDb"));
+        }
+        public static void AddPostgreSqlDb(this IServiceCollection services, string connectionString)
+        {
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(connectionString,
+                providerOptions => providerOptions.EnableRetryOnFailure()));
         }
     }
 }
