@@ -7,5 +7,7 @@ namespace Journify.service.Interfaces
         Task<IEnumerable<Step>> GetAllStepsAsync();
         Task<Step> AddStepAsync(Step step);
         Task<Step> GetStepById(Guid id);
+        Task<Step> UpdateStepAsync(Step step);
+        Task<bool> DeleteStepAsync(Guid id);
     }
 }
