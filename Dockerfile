@@ -11,7 +11,10 @@ RUN dotnet restore src/Journify.api/Journify.api.csproj
 # Copy everything else 
 COPY src/ ./src/
 # Publish
-RUN dotnet publish src/Journify.api/Journify.api.csproj \     -c Release \     -o /app/publish \     --no-restore   
+RUN dotnet publish src/Journify.api/Journify.api.csproj \
+-c Release \
+-o /app/publish \
+--no-restore
 # -------- RUNTIME STAGE -------- 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
