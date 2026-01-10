@@ -1,13 +1,11 @@
-version: "3.9"
-
 services:
-  journify-api:
-    image: journify-api
+  StepManagment-api:
+    image: step-managment-api
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: StepManagmentService/Dockerfile
     ports:
       - "8080:8080"
     env_file:
-      - ./src/Journify.api/.env
+      - ./src/StepManagment.api/.env
     restart: unless-stopped

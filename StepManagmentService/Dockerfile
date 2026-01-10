@@ -1,24 +1,34 @@
 # -------- BUILD STAGE -------- 
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
-WORKDIR /src  
-# Copy csproj files first (for Docker cache) 
-COPY src/Journify.api/Journify.api.csproj src/Journify.api/
-COPY src/Journify.service/Journify.service.csproj src/Journify.service/
-COPY src/Journify.infrastructure/Journify.infrastructure.csproj src/Journify.infrastructure/
-COPY src/Journify.core/Journify.core.csproj src/Journify.core/
-# Restore dependencies
-RUN dotnet restore src/Journify.api/Journify.api.csproj
-# Copy everything else 
-COPY src/ ./src/
-# Publish
-RUN dotnet publish src/Journify.api/Journify.api.csproj \
--c Release \
--o /app/publish \
---no-restore
+# We set the WORKDIR to the root of our "virtual" workspace
+WORKDIR /Journify
+
+# 1. Copy ALL csproj files using their full relative paths from the root
+# This keeps the folder structure identical to your local machine
+COPY StepManagmentService/src/StepManagment.api/StepManagment.api.csproj StepManagmentService/src/StepManagment.api/
+COPY StepManagmentService/src/StepManagment.service/StepManagment.service.csproj StepManagmentService/src/StepManagment.service/
+COPY StepManagmentService/src/StepManagment.infrastructure/StepManagment.infrastructure.csproj StepManagmentService/src/StepManagment.infrastructure/
+COPY Journify.core/Journify.core.csproj Journify.core/
+
+# 2. Restore using the path to the API project
+RUN dotnet restore StepManagmentService/src/StepManagment.api/StepManagment.api.csproj
+
+# 3. Copy the rest of the source code
+COPY StepManagmentService/src/ StepManagmentService/src/
+COPY Journify.core/ Journify.core/
+
+# 4. Publish
+# Note the path change here to match the new structure
+RUN dotnet publish StepManagmentService/src/StepManagment.api/StepManagment.api.csproj \
+    -c Release \
+    -o /out \
+    --no-restore
+
 # -------- RUNTIME STAGE -------- 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
-WORKDIR /app
-COPY --from=build /app/publish .
+WORKDIR /Journify
+# Copy from the /out folder we created in the build stage
+COPY --from=build /out .
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
-ENTRYPOINT ["dotnet", "Journify.api.dll"]
+ENTRYPOINT ["dotnet", "StepManagment.api.dll"]
