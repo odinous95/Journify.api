@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="StateEnums\" />
+    <Compile Remove="StateEnums\**" />
+    <EmbeddedResource Remove="StateEnums\**" />
+    <None Remove="StateEnums\**" />
   </ItemGroup>
 
 </Project>
