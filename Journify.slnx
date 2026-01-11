@@ -1,8 +1,14 @@
 <Solution>
   <Folder Name="/StepManagmentService/">
-    <Project Path="Journify.core/Journify.core.csproj" />
     <Project Path="StepManagmentService/src/StepManagment.api/StepManagment.api.csproj" />
     <Project Path="StepManagmentService/src/StepManagment.infrastructure/StepManagment.infrastructure.csproj" />
     <Project Path="StepManagmentService/src/StepManagment.service/StepManagment.service.csproj" />
   </Folder>
+  <Folder Name="/UserManagmentService/">
+    <Project Path="UserManagmentService/src/UserManagment.api/UserManagment.api.csproj" />
+    <Project Path="UserManagmentService/src/UserManagment.Infrastructure/UserManagment.Infrastructure.csproj" />
+    <Project Path="UserManagmentService/src/UserManagment.service/UserManagment.service.csproj" />
+  </Folder>
+  <Project Path="Journify.core/Journify.core.csproj" />
+  <Project Path="OcelotApiGateway/OcelotApiGateway.csproj" Id="1edf9bdf-3d7c-4f2e-8206-cf6356fb5bf7" />
 </Solution>
