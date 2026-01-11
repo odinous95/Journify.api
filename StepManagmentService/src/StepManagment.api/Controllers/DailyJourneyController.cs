@@ -1,6 +1,6 @@
 ﻿using Journify.core.Entities;
-using StepManagment.service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using StepManagment.service.Interfaces;
 
 namespace StepManagment.api.Controllers
 {
@@ -33,6 +33,20 @@ namespace StepManagment.api.Controllers
             var journey = await _dailyJourneyUsecase.GetJourneyByIdAsync(id);
             if (journey == null) return NotFound("Journey not found.");
             return Ok(journey);
+        }
+        [HttpPut("{id}")]
+        public async Task<ActionResult<DailyJourney>> UpdateJourneyAsync(Guid id, [FromBody] DailyJourney journey)
+        {
+            if (journey == null || id != journey.Id) return BadRequest("Invalid journey data.");
+            var updatedJourney = await _dailyJourneyUsecase.UpdateJourneyAsync(journey);
+            return Ok(updatedJourney);
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteJourneyAsync(Guid id)
+        {
+            var result = await _dailyJourneyUsecase.DeleteJourneyAsync(id);
+            if (!result) return NotFound("Journey not found.");
+            return NoContent();
         }
     }
 }
