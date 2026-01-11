@@ -2,14 +2,14 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/step",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "userservice.local",
-          "Port": 443
+          "Host": "localhost",
+          "Port": 5210
         }
       ],
-      "UpstreamPathTemplate": "/users/{everything}",
+      "UpstreamPathTemplate": "/step/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     }
   ]
