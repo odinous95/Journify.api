@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/StepManagmentService/">
+    <Project Path="Journify.core/Journify.core.csproj" />
+    <Project Path="StepManagmentService/src/StepManagment.api/StepManagment.api.csproj" />
+    <Project Path="StepManagmentService/src/StepManagment.infrastructure/StepManagment.infrastructure.csproj" />
+    <Project Path="StepManagmentService/src/StepManagment.service/StepManagment.service.csproj" />
+  </Folder>
+</Solution>

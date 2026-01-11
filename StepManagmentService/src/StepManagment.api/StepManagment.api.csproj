@@ -15,10 +15,10 @@
 		</PackageReference>
 	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Journify.core\Journify.core.csproj" />
-    <ProjectReference Include="..\StepManagment.infrastructure\StepManagment.infrastructure.csproj" />
-    <ProjectReference Include="..\StepManagment.service\StepManagment.service.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Journify.core\Journify.core.csproj" />
+	  <ProjectReference Include="..\StepManagment.infrastructure\StepManagment.infrastructure.csproj" />
+	  <ProjectReference Include="..\StepManagment.service\StepManagment.service.csproj" />
+	</ItemGroup>
 
 </Project>
