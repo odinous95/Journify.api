@@ -22,5 +22,13 @@ namespace StepManagment.service.usecases
         {
             return await _journeyRepository.GetJourneyById(id);
         }
+        public async Task<DailyJourney> UpdateJourneyAsync(DailyJourney journey)
+        {
+            return await _journeyRepository.UpdateJourneyAsync(journey);
+        }
+        public async Task<bool> DeleteJourneyAsync(Guid id)
+        {
+            return await _journeyRepository.DeleteJourneyAsync(id);
+        }
     }
 }
