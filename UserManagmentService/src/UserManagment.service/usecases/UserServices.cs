@@ -3,7 +3,7 @@ using UserManagment.service.Interfaces;
 
 namespace UserManagment.service.usecases
 {
-    public class UserServices
+    public class UserServices : IUserService
     {
         private readonly IUserRepository _userRepository;
         public UserServices(IUserRepository userRepository)
