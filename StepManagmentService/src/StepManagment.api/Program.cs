@@ -18,7 +18,6 @@ builder.Services.AddControllers(
 // Add Dev Database                   
 var connectionString = Environment.GetEnvironmentVariable("PostgreSqlConnection");
 
-Console.WriteLine("Using Connection String: " + connectionString);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
