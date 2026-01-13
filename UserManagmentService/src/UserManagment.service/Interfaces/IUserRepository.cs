@@ -6,7 +6,7 @@ namespace UserManagment.service.Interfaces
     {
         Task<IEnumerable<User>> GetAllUsersAsync();
         Task<User> AddUserAsync(User user);
-        Task<User> GetUserById(Guid id);
+        Task<User> GetUserByIdAsync(Guid id);
         Task<User> UpdateUserAsync(User user);
         Task<bool> DeleteUserAsync(Guid id);
     }

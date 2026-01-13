@@ -18,9 +18,9 @@ namespace UserManagment.service.usecases
         {
             return await _userRepository.GetAllUsersAsync();
         }
-        public async Task<User> GetUserById(Guid id)
+        public async Task<User> GetUserByIdAsync(Guid id)
         {
-            return await _userRepository.GetUserById(id);
+            return await _userRepository.GetUserByIdAsync(id);
         }
         public async Task<User> UpdateUserAsync(User user)
         {
