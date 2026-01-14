@@ -11,4 +11,5 @@
   </Folder>
   <Project Path="Journify.core/Journify.core.csproj" />
   <Project Path="OcelotApiGateway/OcelotApiGateway.csproj" Id="1edf9bdf-3d7c-4f2e-8206-cf6356fb5bf7" />
+  <Project Path="ShareLib/ShareLib.csproj" Id="6b1c4193-1444-4bfb-b124-1d4ae4573e55" />
 </Solution>
