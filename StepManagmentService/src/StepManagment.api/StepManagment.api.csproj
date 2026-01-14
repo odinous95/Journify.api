@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Journify.core\Journify.core.csproj" />
+	  <ProjectReference Include="..\..\..\ShareLib\ShareLib.csproj" />
 	  <ProjectReference Include="..\StepManagment.infrastructure\StepManagment.infrastructure.csproj" />
 	  <ProjectReference Include="..\StepManagment.service\StepManagment.service.csproj" />
 	</ItemGroup>

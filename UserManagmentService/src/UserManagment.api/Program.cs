@@ -1,5 +1,6 @@
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
+using ShareLib.SharedMiddlewares;
 using UserManagment.api.Filters;
 using UserManagment.infrastructure.Data;
 using UserManagment.Infrastructure.Repository;
@@ -38,7 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-
+app.UseMiddleware<RestrictAccessMiddleware>();
 app.MapControllers();
 
 app.Run();

@@ -1,5 +1,6 @@
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
+using ShareLib.SharedMiddlewares;
 using StepManagment.api.Filters;
 using StepManagment.infrastructure.Data;
 using StepManagment.infrastructure.Repository;
@@ -43,10 +44,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseMiddleware<RestrictAccessMiddleware>();
 app.MapControllers();
 
 app.Run();
