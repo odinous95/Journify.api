@@ -4,7 +4,7 @@
     {
         public async Task InvokeAsync(HttpContext context)
         {
-            context.Request.Headers["Referrer"] = "Api-Gateway";
+            context.Request.Headers["Referer"] = "Api-Gateway";
             await next(context);
         }
     }
