@@ -14,8 +14,6 @@ namespace UserManagment.api.Controllers
         {
             _userService = userService;
         }
-
-
         [HttpPost]
         public async Task<ActionResult> CreateUser([FromBody] CreateUserDto request)
         {
@@ -26,21 +24,26 @@ namespace UserManagment.api.Controllers
                 request.Email,
                 request.Password
             );
-
-            await _userService.AddUserAsync(command);
-
-            return Ok();
+            var result = await _userService.CreateUserAsync(command);
+            return Ok(result);
         }
-
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult> GetUserByIdAsync(Guid id)
+        [HttpPost]
+        [Route("login")]
+        public async Task<ActionResult> LoginUser([FromBody] LoginUserDto request)
         {
-            var user = await _userService.GetUserByIdAsync(id);
-            if (user == null) return NotFound("User not found.");
-            return Ok(user);
-
+            if (request == null)
+                return BadRequest("Input data is null.");
+            var command = new LoginUserCommand(
+                request.Email,
+                request.Password
+            );
+            var result = await _userService.LoginUserAsync(command);
+            if (result == null)
+                return Unauthorized("Invalid credentials.");
+            return Ok(result);
         }
+
+
 
         [HttpGet]
         public async Task<ActionResult> GetAllUsersAsync()
@@ -48,6 +51,14 @@ namespace UserManagment.api.Controllers
             var users = await _userService.GetAllUsersAsync();
             if (users == null) return NotFound("No users found.");
             return Ok(users);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetUserByIdAsync(Guid id)
+        {
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null) return NotFound("User not found.");
+            return Ok(user);
         }
     }
 }
