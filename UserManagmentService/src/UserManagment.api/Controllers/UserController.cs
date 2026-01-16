@@ -46,7 +46,7 @@ namespace UserManagment.api.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult> GetAllUsersAsync()
         {
@@ -54,7 +54,7 @@ namespace UserManagment.api.Controllers
             if (users == null) return NotFound("No users found.");
             return Ok(users);
         }
-
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetUserByIdAsync(Guid id)
         {

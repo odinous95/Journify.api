@@ -22,7 +22,8 @@ namespace UserManagment.service.usecases
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email)
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim( ClaimTypes.Role , user.Role),
             };
 
             var key = new SymmetricSecurityKey(
