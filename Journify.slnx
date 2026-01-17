@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Taskfile.yml" />
+  </Folder>
   <Folder Name="/StepManagmentService/">
     <Project Path="StepManagmentService/src/StepManagment.api/StepManagment.api.csproj" />
     <Project Path="StepManagmentService/src/StepManagment.infrastructure/StepManagment.infrastructure.csproj" />
