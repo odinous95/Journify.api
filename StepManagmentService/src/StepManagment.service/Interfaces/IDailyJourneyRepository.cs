@@ -4,8 +4,8 @@ namespace StepManagment.service.Interfaces
 {
     public interface IDailyJourneyRepository
     {
+        Task AddJourneyAsync(DailyJourney journey);
         Task<IEnumerable<DailyJourney>> GetAllJourneysAsync();
-        Task<DailyJourney> AddJourneyAsync(DailyJourney journey);
         Task<DailyJourney> GetJourneyById(Guid id);
         Task<DailyJourney> UpdateJourneyAsync(DailyJourney journey);
         Task<bool> DeleteJourneyAsync(Guid id);
