@@ -12,8 +12,8 @@ using StepManagment.infrastructure.Data;
 namespace StepManagment.infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260110201720_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260117123012_myNewMigration")]
+    partial class myNewMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,15 +34,14 @@ namespace StepManagment.infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateOnly>("JournyDate")
-                        .HasColumnType("date");
+                    b.Property<string>("JounreyName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("DailyJournies");
 
@@ -51,14 +50,14 @@ namespace StepManagment.infrastructure.Migrations
                         {
                             Id = new Guid("11111111-1111-1111-1111-111111111111"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            JournyDate = new DateOnly(2024, 1, 1),
+                            JounreyName = "Morning Walk",
                             UserId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
                         },
                         new
                         {
                             Id = new Guid("33333333-3333-3333-3333-333333333333"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            JournyDate = new DateOnly(2024, 1, 1),
+                            JounreyName = "Morning Walk",
                             UserId = new Guid("e13b5f1e-7c54-4b01-90e6-d701748f0852")
                         });
                 });
@@ -118,43 +117,6 @@ namespace StepManagment.infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Journify.core.Entities.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("Journify.core.Entities.DailyJourney", b =>
-                {
-                    b.HasOne("Journify.core.Entities.User", "User")
-                        .WithMany("Journeys")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Journify.core.Entities.Step", b =>
                 {
                     b.HasOne("Journify.core.Entities.DailyJourney", null)
@@ -167,11 +129,6 @@ namespace StepManagment.infrastructure.Migrations
             modelBuilder.Entity("Journify.core.Entities.DailyJourney", b =>
                 {
                     b.Navigation("Entries");
-                });
-
-            modelBuilder.Entity("Journify.core.Entities.User", b =>
-                {
-                    b.Navigation("Journeys");
                 });
 #pragma warning restore 612, 618
         }

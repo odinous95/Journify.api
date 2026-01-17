@@ -13,11 +13,10 @@ namespace StepManagment.infrastructure.Repository
         {
             _appDbcontext = appDbContext;
         }
-        public async Task<DailyJourney> AddJourneyAsync(DailyJourney journey)
+        public async Task AddJourneyAsync(DailyJourney journey)
         {
             _appDbcontext.DailyJournies.Add(journey);
             await _appDbcontext.SaveChangesAsync();
-            return journey;
         }
 
         public async Task<IEnumerable<DailyJourney>> GetAllJourneysAsync()
