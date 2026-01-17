@@ -16,7 +16,7 @@ namespace UserManagment.api.Controllers
             _userService = userService;
         }
         [HttpPost]
-        [Route("register")]
+        [Route("create-user")]
         public async Task<ActionResult> CreateUser([FromBody] CreateUserDto request)
         {
             if (request == null)
@@ -54,7 +54,8 @@ namespace UserManagment.api.Controllers
             if (users == null) return NotFound("No users found.");
             return Ok(users);
         }
-        [Authorize]
+
+        [Authorize(Roles = "Admin")]
         [HttpGet("{id}")]
         public async Task<ActionResult> GetUserByIdAsync(Guid id)
         {
