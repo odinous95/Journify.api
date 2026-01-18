@@ -1,6 +1,8 @@
 ﻿using Journify.core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StepManagment.api.DTOS;
+using StepManagment.service.commands;
 using StepManagment.service.Interfaces;
 
 namespace StepManagment.api.Controllers
@@ -14,6 +16,10 @@ namespace StepManagment.api.Controllers
         {
             _stepService = stepService;
         }
+
+
+
+
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<Step>> GetAllStepsAsync()
@@ -22,14 +28,21 @@ namespace StepManagment.api.Controllers
             if (steps == null) return NotFound("No steps found.");
             return Ok(steps);
         }
+
+
+
+
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult<Step>> CreateStepAsync([FromBody] Step step)
+        public async Task<ActionResult<Step>> CreateStepAsync([FromBody] CreateStepDTO dto)
         {
-            if (step == null) return BadRequest("Step data is null.");
-            var createdStep = await _stepService.AddStepAsync(step);
-            return createdStep;
+            if (dto == null) return BadRequest("Data is null.");
+            var command = new CreateStepCommand(dto.Title, dto.Description);
+            await _stepService.AddStepAsync(command);
+            return Ok();
         }
+
+
         [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Step>> GetStepById(Guid id)
