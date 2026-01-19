@@ -12,11 +12,11 @@ namespace StepManagment.infrastructure.Repository
         {
             _appDbcontext = appDbContext;
         }
-        public async Task<Step> AddStepAsync(Step step)
+        public async Task AddStepAsync(Step step)
         {
             _appDbcontext.Steps.Add(step);
             await _appDbcontext.SaveChangesAsync();
-            return step;
+
         }
         public async Task<IEnumerable<Step>> GetAllStepsAsync()
         {

@@ -13,11 +13,31 @@ namespace StepManagment.infrastructure.Repository
         {
             _appDbcontext = appDbContext;
         }
+
+
+
+
         public async Task AddJourneyAsync(DailyJourney journey)
         {
             _appDbcontext.DailyJournies.Add(journey);
             await _appDbcontext.SaveChangesAsync();
         }
+
+
+
+
+
+
+        public async Task<DailyJourney> UpdateJourneyAsync(DailyJourney journey)
+        {
+            _appDbcontext.DailyJournies.Update(journey);
+            await _appDbcontext.SaveChangesAsync();
+            return journey;
+        }
+
+
+
+
 
         public async Task<IEnumerable<DailyJourney>> GetAllJourneysAsync()
         {
@@ -29,12 +49,7 @@ namespace StepManagment.infrastructure.Repository
             return await _appDbcontext.DailyJournies.FindAsync(id);
 
         }
-        public async Task<DailyJourney> UpdateJourneyAsync(DailyJourney journey)
-        {
-            _appDbcontext.DailyJournies.Update(journey);
-            await _appDbcontext.SaveChangesAsync();
-            return journey;
-        }
+
         public async Task<bool> DeleteJourneyAsync(Guid id)
         {
             var journey = await _appDbcontext.DailyJournies.FindAsync(id);
@@ -46,5 +61,6 @@ namespace StepManagment.infrastructure.Repository
             await _appDbcontext.SaveChangesAsync();
             return true;
         }
+
     }
 }
