@@ -13,8 +13,6 @@ namespace StepManagment.service.usecases
         }
 
 
-
-
         public async Task AddStepAsync(CreateStepCommand command)
         {
             Step step = new();
@@ -24,7 +22,14 @@ namespace StepManagment.service.usecases
         }
 
 
-
+        public async Task<Step> UpdateStepAsync(UpdateStepCommand command)
+        {
+            Step step = new();
+            step.Id = command.Id;
+            step.Title = command.Title;
+            step.Description = command.Description;
+            return await _stepRepository.UpdateStepAsync(step);
+        }
 
 
 
@@ -36,10 +41,7 @@ namespace StepManagment.service.usecases
         {
             return await _stepRepository.GetStepById(id);
         }
-        public async Task<Step> UpdateStepAsync(Step step)
-        {
-            return await _stepRepository.UpdateStepAsync(step);
-        }
+
         public async Task<bool> DeleteStepAsync(Guid id)
         {
             return await _stepRepository.DeleteStepAsync(id);
