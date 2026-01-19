@@ -24,11 +24,14 @@ namespace StepManagment.service.usecases
 
         public async Task<Step> UpdateStepAsync(UpdateStepCommand command)
         {
-            Step step = new();
-            step.Id = command.Id;
-            step.Title = command.Title;
-            step.Description = command.Description;
-            return await _stepRepository.UpdateStepAsync(step);
+            var existingStep = await _stepRepository.GetStepById(command.Id);
+            if (existingStep == null)
+            {
+                throw new KeyNotFoundException($"Step with ID {command.Id} not found.");
+            }
+            existingStep.Title = command.Title;
+            existingStep.Description = command.Description;
+            return await _stepRepository.UpdateStepAsync(existingStep);
         }
 
 

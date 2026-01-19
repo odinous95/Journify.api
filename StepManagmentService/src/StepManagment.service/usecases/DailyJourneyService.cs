@@ -23,13 +23,17 @@ namespace StepManagment.service.usecases
 
 
 
-
         public async Task<DailyJourney> UpdateJourneyAsync(UpdateJourneyCommand command)
         {
-            DailyJourney journey = new();
-            journey.Id = command.JourneyId;
-            journey.JounreyName = command.JourneyName;
-            return await _journeyRepository.UpdateJourneyAsync(journey);
+            var existingJourney = await _journeyRepository.GetJourneyById(command.JourneyId);
+            if (existingJourney == null)
+            {
+
+                throw new KeyNotFoundException($"Journey with ID {command.JourneyId} was not found.");
+            }
+
+            existingJourney.JounreyName = command.JourneyName;
+            return await _journeyRepository.UpdateJourneyAsync(existingJourney);
         }
 
 
