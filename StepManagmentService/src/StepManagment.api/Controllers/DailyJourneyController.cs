@@ -11,15 +11,11 @@ namespace StepManagment.api.Controllers
     [Route("api/dailyjourney")]
     public class DailyJourneyController : ControllerBase
     {
-
-
         private readonly IDailyJourneyService _dailyJourneyUsecase;
         public DailyJourneyController(IDailyJourneyService dailyJourneyUsecase)
         {
             _dailyJourneyUsecase = dailyJourneyUsecase;
         }
-
-
 
         [Authorize]
         [HttpPost()]
