@@ -25,7 +25,7 @@
       "UpstreamHttpMethod": [ "post" ]
     },
     {
-      "DownstreamPathTemplate": "/api/step/{everything}",
+      "DownstreamPathTemplate": "/api/step",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -33,9 +33,23 @@
           "Port": 5210
         }
       ],
-      "UpstreamPathTemplate": "/step/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamPathTemplate": "/step",
+      "UpstreamHttpMethod": [ "GET" ]
     },
+    {
+      "DownstreamPathTemplate": "/api/step/create",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5210
+        }
+      ],
+      "UpstreamPathTemplate": "/step/create",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+
     {
       "DownstreamPathTemplate": "/api/user/register",
       "DownstreamScheme": "http",
