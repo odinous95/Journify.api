@@ -18,6 +18,7 @@ namespace StepManagment.service.usecases
             Step step = new();
             step.Title = command.Title;
             step.Description = command.Description;
+            step.DailyJourneyId = command.JourneyId;
             await _stepRepository.AddStepAsync(step);
         }
 
