@@ -5,7 +5,7 @@
 namespace StepManagment.infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class myNewMigration : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

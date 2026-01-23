@@ -12,8 +12,8 @@ using StepManagment.infrastructure.Data;
 namespace StepManagment.infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260117123012_myNewMigration")]
-    partial class myNewMigration
+    [Migration("20260123134626_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ namespace StepManagment.infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("JounreyName")
+                    b.Property<string>("JourneyName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -50,15 +50,8 @@ namespace StepManagment.infrastructure.Migrations
                         {
                             Id = new Guid("11111111-1111-1111-1111-111111111111"),
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            JounreyName = "Morning Walk",
+                            JourneyName = "Morning Walk",
                             UserId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
-                        },
-                        new
-                        {
-                            Id = new Guid("33333333-3333-3333-3333-333333333333"),
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            JounreyName = "Morning Walk",
-                            UserId = new Guid("e13b5f1e-7c54-4b01-90e6-d701748f0852")
                         });
                 });
 
@@ -120,7 +113,7 @@ namespace StepManagment.infrastructure.Migrations
             modelBuilder.Entity("Journify.core.Entities.Step", b =>
                 {
                     b.HasOne("Journify.core.Entities.DailyJourney", null)
-                        .WithMany("Entries")
+                        .WithMany("Steps")
                         .HasForeignKey("DailyJourneyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -128,7 +121,7 @@ namespace StepManagment.infrastructure.Migrations
 
             modelBuilder.Entity("Journify.core.Entities.DailyJourney", b =>
                 {
-                    b.Navigation("Entries");
+                    b.Navigation("Steps");
                 });
 #pragma warning restore 612, 618
         }
