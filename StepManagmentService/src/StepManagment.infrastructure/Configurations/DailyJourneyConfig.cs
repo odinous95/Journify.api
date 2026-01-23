@@ -14,16 +14,7 @@ namespace StepManagment.infrastructure.Configurations
                 {
                     Id = Guid.Parse("11111111-1111-1111-1111-111111111111"),
                     UserId = Guid.Parse("d290f1ee-6c54-4b01-90e6-d701748f0851"),
-                    JounreyName = "Morning Walk",
-                    CreatedAt = new DateTime(2024, 01, 01, 0, 0, 0, DateTimeKind.Utc),
-
-
-                },
-                new DailyJourney
-                {
-                    Id = Guid.Parse("33333333-3333-3333-3333-333333333333"),
-                    UserId = Guid.Parse("e13b5f1e-7c54-4b01-90e6-d701748f0852"),
-                    JounreyName = "Morning Walk",
+                    JourneyName = "Morning Walk",
                     CreatedAt = new DateTime(2024, 01, 01, 0, 0, 0, DateTimeKind.Utc)
                 }
              );
