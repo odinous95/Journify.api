@@ -12,6 +12,8 @@ using UserManagment.service.usecases;
 Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddControllers();
 // Add services to the container.
 // Register Repositories and Services
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -38,7 +40,11 @@ if (app.Environment.IsDevelopment())
 
 }
 app.UseMiddleware<ExceptionMiddleware>();
+
+// Ensure auth order: Authentication then Authorization
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseMiddleware<RestrictAccessMiddleware>();
 app.MapControllers();
 
