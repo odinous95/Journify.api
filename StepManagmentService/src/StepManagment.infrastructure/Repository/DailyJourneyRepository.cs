@@ -42,11 +42,13 @@ namespace StepManagment.infrastructure.Repository
         public async Task<IEnumerable<DailyJourney>> GetAllJourneysAsync()
         {
             return await _appDbcontext.DailyJournies
-                    .Include(j => j.Steps)
-                    .ToListAsync();
+           .Include(j => j.Steps)
+           .AsNoTracking()
+           .ToListAsync();
+
         }
 
-        public async Task<DailyJourney> GetJourneyById(Guid id)
+        public async Task<DailyJourney?> GetJourneyById(Guid id)
         {
             return await _appDbcontext.DailyJournies.FindAsync(id);
 
