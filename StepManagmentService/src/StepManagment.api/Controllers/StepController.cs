@@ -12,69 +12,63 @@ namespace StepManagment.api.Controllers
     public class StepController : ControllerBase
     {
         private readonly IStepService _stepService;
+
         public StepController(IStepService stepService)
         {
             _stepService = stepService;
         }
 
-
-        //[Authorize]
-        [HttpPost]
-        [Route("create")]
-        public async Task<ActionResult<Step>> CreateStepAsync([FromBody] CreateStepDTO dto)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateStepAsync([FromBody] CreateStepDTO dto)
         {
-            if (dto == null) return BadRequest("Data is null.");
-            var command = new CreateStepCommand(dto.JourneyId, dto.Title, dto.Description);
+            var command = new CreateStepCommand(
+                dto.JourneyId,
+                dto.Title,
+                dto.Description
+            );
+
             await _stepService.AddStepAsync(command);
             return Ok();
         }
 
-
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult<Step>> UpdateStepAsync([FromBody] UpdateStepDTO dto)
+        public async Task<IActionResult> UpdateStepAsync(
+            Guid id,
+            [FromBody] UpdateStepDTO dto)
         {
-            if (dto == null) return BadRequest("Invalid step data.");
-            var command = new UpdateStepCommand(dto.Id, dto.Title, dto.Description);
-            var updatedStep = await _stepService.UpdateStepAsync(command);
+            var command = new UpdateStepCommand(
+                id,
+                dto.Title,
+                dto.Description
+            );
+
+            await _stepService.UpdateStepAsync(command);
             return Ok();
         }
 
-
-
-
-        //[Authorize]
         [HttpGet]
-        public async Task<ActionResult<Step>> GetAllStepsAsync()
+        public async Task<IActionResult> GetAllStepsAsync()
         {
             var steps = await _stepService.GetAllStepsAsync();
-            if (steps == null) return NotFound("No steps found.");
             return Ok(steps);
         }
 
-
-
-
-
-
-
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Step>> GetStepById(Guid id)
+        public async Task<IActionResult> GetStepById(Guid id)
         {
             var step = await _stepService.GetStepById(id);
-            if (step == null) return NotFound("Step not found.");
             return Ok(step);
         }
 
-
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteStepAsync(Guid id)
+        public async Task<IActionResult> DeleteStepAsync(Guid id)
         {
-            var result = await _stepService.DeleteStepAsync(id);
-            if (!result) return NotFound("Step not found.");
+            await _stepService.DeleteStepAsync(id);
             return NoContent();
         }
     }
+
 }

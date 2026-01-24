@@ -1,5 +1,4 @@
-﻿using Journify.core.Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StepManagment.api.DTOS;
 using StepManagment.service.commands;
@@ -12,68 +11,51 @@ namespace StepManagment.api.Controllers
     public class DailyJourneyController : ControllerBase
     {
         private readonly IDailyJourneyService _dailyJourneyUsecase;
+
         public DailyJourneyController(IDailyJourneyService dailyJourneyUsecase)
         {
             _dailyJourneyUsecase = dailyJourneyUsecase;
         }
 
-        //[Authorize]
-        [HttpPost()]
-        [Route("create")]
-        public async Task<ActionResult<CreateJourneyDTO>> CreateJourney([FromBody] CreateJourneyDTO dto)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateJourney([FromBody] CreateJourneyDTO dto)
         {
-            if (dto == null) return BadRequest("Data is null.");
             var command = new CreateJourneyCommand(dto.userId, dto.journeyName);
             await _dailyJourneyUsecase.CreateJourneyAsync(command);
             return Ok();
         }
 
-
-
         [Authorize]
         [HttpPut("{id}")]
-        public async Task<ActionResult<DailyJourney>> UpdateJourneyAsync([FromBody] UpdateJourneyDTO dto)
+        public async Task<IActionResult> UpdateJourneyAsync([FromBody] UpdateJourneyDTO dto)
         {
-            if (dto == null) return BadRequest("Invalid journey data.");
             var command = new UpdateJourneyCommand(dto.JourneyId, dto.JourneyName);
             var updatedJourney = await _dailyJourneyUsecase.UpdateJourneyAsync(command);
             return Ok(updatedJourney);
         }
 
-
-
-
-        //[Authorize]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DailyJourney>>> GetAllJourneysAsync()
+        public async Task<IActionResult> GetAllJourneysAsync()
         {
             var journeys = await _dailyJourneyUsecase.GetAllJourneysAsync();
-            if (journeys == null) return NotFound("No journeys found.");
-            return Ok(journeys);
+            return Ok(journeys); // Middleware handles empty/null if needed
         }
-
 
         [Authorize]
         [HttpGet("{id}")]
-        public async Task<ActionResult<DailyJourney>> GetJourneyByIdAsync(Guid id)
+        public async Task<IActionResult> GetJourneyByIdAsync(Guid id)
         {
-            if (id == Guid.Empty) return BadRequest("Invalid ID.");
             var journey = await _dailyJourneyUsecase.GetJourneyByIdAsync(id);
-            if (journey == null) return NotFound("Journey not found.");
-            return Ok(journey);
+            return Ok(journey); // Exception thrown if not found
         }
-
 
         [Authorize]
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteJourneyAsync(Guid id)
+        public async Task<IActionResult> DeleteJourneyAsync(Guid id)
         {
-            if (id == Guid.Empty) return BadRequest("Invalid ID.");
-            var result = await _dailyJourneyUsecase.DeleteJourneyAsync(id);
-            if (!result) return NotFound("Journey not found.");
+            await _dailyJourneyUsecase.DeleteJourneyAsync(id); // Exception if not found
             return NoContent();
         }
-
-
     }
+
 }
