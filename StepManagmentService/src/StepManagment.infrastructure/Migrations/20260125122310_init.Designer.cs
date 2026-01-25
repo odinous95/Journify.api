@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using UserManagment.infrastructure.Data;
+using StepManagment.infrastructure.Data;
 
 #nullable disable
 
-namespace UserManagment.Infrastructure.Migrations
+namespace StepManagment.infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260117115124_init")]
+    [Migration("20260125122310_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace UserManagment.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.2")
+                .HasAnnotation("ProductVersion", "10.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -34,7 +34,7 @@ namespace UserManagment.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("JounreyName")
+                    b.Property<string>("JourneyName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -43,9 +43,16 @@ namespace UserManagment.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.ToTable("DailyJournies");
 
-                    b.ToTable("DailyJourney");
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            JourneyName = "Morning Walk",
+                            UserId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        });
                 });
 
             modelBuilder.Entity("Journify.core.Entities.Step", b =>
@@ -78,52 +85,35 @@ namespace UserManagment.Infrastructure.Migrations
 
                     b.HasIndex("DailyJourneyId");
 
-                    b.ToTable("Step");
-                });
+                    b.ToTable("Steps");
 
-            modelBuilder.Entity("Journify.core.Entities.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Journify.core.Entities.DailyJourney", b =>
-                {
-                    b.HasOne("Journify.core.Entities.User", null)
-                        .WithMany("Journeys")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("a1b2c3d4-e5f6-4789-9012-3456789abcde"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DailyJourneyId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Description = "Start your day with a 10-minute meditation session.",
+                            IsCompleted = false,
+                            LastUpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Title = "Morning Meditation"
+                        },
+                        new
+                        {
+                            Id = new Guid("f1e2d3c4-b5a6-4789-9012-3456789fedcb"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            DailyJourneyId = new Guid("33333333-3333-3333-3333-333333333333"),
+                            Description = "Reflect on your day and jot down your thoughts in your journal.",
+                            IsCompleted = false,
+                            LastUpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Title = "Evening Reflection"
+                        });
                 });
 
             modelBuilder.Entity("Journify.core.Entities.Step", b =>
                 {
                     b.HasOne("Journify.core.Entities.DailyJourney", null)
-                        .WithMany("Entries")
+                        .WithMany("Steps")
                         .HasForeignKey("DailyJourneyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -131,12 +121,7 @@ namespace UserManagment.Infrastructure.Migrations
 
             modelBuilder.Entity("Journify.core.Entities.DailyJourney", b =>
                 {
-                    b.Navigation("Entries");
-                });
-
-            modelBuilder.Entity("Journify.core.Entities.User", b =>
-                {
-                    b.Navigation("Journeys");
+                    b.Navigation("Steps");
                 });
 #pragma warning restore 612, 618
         }

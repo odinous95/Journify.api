@@ -31,7 +31,7 @@ namespace UserManagment.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("JounreyName")
+                    b.Property<string>("JourneyName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -120,7 +120,7 @@ namespace UserManagment.Infrastructure.Migrations
             modelBuilder.Entity("Journify.core.Entities.Step", b =>
                 {
                     b.HasOne("Journify.core.Entities.DailyJourney", null)
-                        .WithMany("Entries")
+                        .WithMany("Steps")
                         .HasForeignKey("DailyJourneyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -128,7 +128,7 @@ namespace UserManagment.Infrastructure.Migrations
 
             modelBuilder.Entity("Journify.core.Entities.DailyJourney", b =>
                 {
-                    b.Navigation("Entries");
+                    b.Navigation("Steps");
                 });
 
             modelBuilder.Entity("Journify.core.Entities.User", b =>
