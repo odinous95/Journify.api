@@ -17,7 +17,7 @@ namespace UserManagment.api.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        [Route("create-user")]
+        [Route("register")]
         public async Task<ActionResult> CreateUser([FromBody] CreateUserDto request)
         {
             if (request == null)
