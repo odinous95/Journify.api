@@ -19,7 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Journify.core\Journify.core.csproj" />
     <ProjectReference Include="..\..\..\ShareLib\ShareLib.csproj" />
-    <ProjectReference Include="..\UserManagment.Infrastructure\UserManagment.infrastructure.csproj" />
+    <ProjectReference Include="..\UserManagment.infrastructure\UserManagment.infrastructure.csproj" />
     <ProjectReference Include="..\UserManagment.service\UserManagment.service.csproj" />
   </ItemGroup>
 
