@@ -34,8 +34,8 @@ COPY OcelotApiGateway/appsettings.json ./
 COPY OcelotApiGateway/appsettings.Development.json ./
 
 # Expose gateway port
-EXPOSE 8282
-ENV ASPNETCORE_URLS=http://+:8282
+EXPOSE 8082
+ENV ASPNETCORE_URLS=http://+:8082
 
 # Run the gateway
 ENTRYPOINT ["dotnet", "OcelotApiGateway.dll"]
