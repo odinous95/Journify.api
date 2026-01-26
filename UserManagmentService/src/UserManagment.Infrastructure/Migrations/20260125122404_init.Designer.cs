@@ -9,7 +9,7 @@ using UserManagment.infrastructure.Data;
 
 #nullable disable
 
-namespace UserManagment.Infrastructure.Migrations
+namespace UserManagment.infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20260125122404_init")]
