@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ocelot-config
+data:
+  ocelot.json: |
+    {
+      "Routes": [
+        {
+          "DownstreamPathTemplate": "/api/dailyjourney",
+          "DownstreamScheme": "http",
+          "DownstreamHostAndPorts": [
+            { "Host": "step-service", "Port": 5210 }
+          ],
+          "UpstreamPathTemplate": "/dailyjourney",
+          "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+          "DownstreamPathTemplate": "/api/dailyjourney/create",
+          "DownstreamScheme": "http",
+          "DownstreamHostAndPorts": [
+            { "Host": "step-service", "Port": 5210 }
+          ],
+          "UpstreamPathTemplate": "/dailyjourney/create",
+          "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+          "DownstreamPathTemplate": "/api/step",
+          "DownstreamScheme": "http",
+          "DownstreamHostAndPorts": [
+            { "Host": "step-service", "Port": 5210 }
+          ],
+          "UpstreamPathTemplate": "/step",
+          "UpstreamHttpMethod": [ "GET" ]
+        },
+        {
+          "DownstreamPathTemplate": "/api/step/create",
+          "DownstreamScheme": "http",
+          "DownstreamHostAndPorts": [
+            { "Host": "step-service", "Port": 5210 }
+          ],
+          "UpstreamPathTemplate": "/step/create",
+          "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+          "DownstreamPathTemplate": "/api/user/register",
+          "DownstreamScheme": "http",
+          "DownstreamHostAndPorts": [
+            { "Host": "user-service", "Port": 5295 }
+          ],
+          "UpstreamPathTemplate": "/user/register",
+          "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+          "DownstreamPathTemplate": "/api/user/login",
+          "DownstreamScheme": "http",
+          "DownstreamHostAndPorts": [
+            { "Host": "user-service", "Port": 5295 }
+          ],
+          "UpstreamPathTemplate": "/user/login",
+          "UpstreamHttpMethod": [ "POST" ]
+        },
+        {
+          "DownstreamPathTemplate": "/api/user/{everything}",
+          "DownstreamScheme": "http",
+          "DownstreamHostAndPorts": [
+            { "Host": "user-service", "Port": 5295 }
+          ],
+          "UpstreamPathTemplate": "/user/{everything}",
+          "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
+        }
+      ],
+      "GlobalConfiguration": {
+        "BaseUrl": "http://api-gateway:8082"
+      }
+    }

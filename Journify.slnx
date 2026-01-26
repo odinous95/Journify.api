@@ -1,20 +1,32 @@
 <Solution>
+  <Folder Name="/k8s/" />
+  <Folder Name="/k8s/gateway/">
+    <File Path="k8s/gateway/gateway-deployment.yaml" />
+    <File Path="k8s/gateway/gateway-service.yaml" />
+  </Folder>
+  <Folder Name="/k8s/step/">
+    <File Path="k8s/step/ocelot-config.yaml" />
+    <File Path="k8s/step/step-deployement.yaml" />
+  </Folder>
+  <Folder Name="/k8s/user/">
+    <File Path="k8s/user/user-deployment.yaml" />
+    <File Path="k8s/user/user-service.yaml" />
+  </Folder>
   <Folder Name="/Solution Items/">
     <File Path="Taskfile.yml" />
   </Folder>
 
   <Folder Name="/StepManagmentService/">
     <Project Path="StepManagmentService/src/StepManagment.api/StepManagment.api.csproj" />
-    <Project Path="StepManagmentService/src/StepManagment.service/StepManagment.service.csproj" />
     <Project Path="StepManagmentService/src/StepManagment.infrastructure/StepManagment.infrastructure.csproj" />
+    <Project Path="StepManagmentService/src/StepManagment.service/StepManagment.service.csproj" />
   </Folder>
 
   <Folder Name="/UserManagmentService/">
     <Project Path="UserManagmentService/src/UserManagment.api/UserManagment.api.csproj" />
-    <Project Path="UserManagmentService/src/UserManagment.service/UserManagment.service.csproj" />
     <Project Path="UserManagmentService/src/UserManagment.infrastructure/UserManagment.infrastructure.csproj" />
+    <Project Path="UserManagmentService/src/UserManagment.service/UserManagment.service.csproj" />
   </Folder>
-
   <Project Path="Journify.core/Journify.core.csproj" />
   <Project Path="OcelotApiGateway/OcelotApiGateway.csproj" />
   <Project Path="ShareLib/ShareLib.csproj" />

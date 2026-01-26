@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: step-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: step
+  template:
+    metadata:
+      labels:
+        app: step
+    spec:
+      containers:
+      - name: step
+        image: kuber/journify-step:latest
+        ports:
+        - containerPort: 5210
