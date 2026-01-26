@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: kuber/journify-apigateway:latest
+        image: levantisk/journify-apigateway:latest
         ports:
         - containerPort: 8082
         volumeMounts:
