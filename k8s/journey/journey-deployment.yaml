@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: step-deployment
+  name: journey-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: step
+      app: journey
   template:
     metadata:
       labels:
-        app: step
+        app: journey
     spec:
       containers:
-      - name: step
+      - name: journey
         image: levantisk/journify-step:latest
         ports:
         - containerPort: 8080
