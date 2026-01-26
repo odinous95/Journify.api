@@ -1,5 +1,4 @@
-﻿using Journify.core.Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StepManagment.api.DTOS;
 using StepManagment.service.commands;
@@ -17,7 +16,7 @@ namespace StepManagment.api.Controllers
         {
             _stepService = stepService;
         }
-
+        [Authorize]
         [HttpPost("create")]
         public async Task<IActionResult> CreateStepAsync([FromBody] CreateStepDTO dto)
         {
@@ -46,7 +45,7 @@ namespace StepManagment.api.Controllers
             await _stepService.UpdateStepAsync(command);
             return Ok();
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllStepsAsync()
         {
