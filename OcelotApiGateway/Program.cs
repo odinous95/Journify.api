@@ -1,6 +1,5 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using OcelotApiGateway.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
@@ -31,7 +30,7 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello World from Ocelot Api gateway!");
 app.MapControllers();
-app.UseMiddleware<InterceptMiddleware>();
+//app.UseMiddleware<InterceptMiddleware>();
 app.UseCors("AllowAll");
 
 await app.UseOcelot();
