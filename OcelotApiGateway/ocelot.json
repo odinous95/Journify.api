@@ -54,7 +54,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "user-service",
-          "Port": 5295
+          "Port": 8081
         }
       ],
       "UpstreamPathTemplate": "/user/register",
@@ -66,7 +66,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "user-service",
-          "Port": 5295
+          "Port": 8081
         }
       ],
       "UpstreamPathTemplate": "/user/login",
@@ -78,7 +78,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "user-service",
-          "Port": 5295
+          "Port": 8081
         }
       ],
       "UpstreamPathTemplate": "/user/{everything}",
