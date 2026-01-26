@@ -17,11 +17,3 @@ spec:
         image: levantisk/journify-gateway:latest
         ports:
         - containerPort: 8082
-        volumeMounts:
-        - name: ocelot-config
-          mountPath: /app/ocelot.json
-          subPath: ocelot.json
-      volumes:
-      - name: ocelot-config
-        configMap:
-          name: ocelot-config
