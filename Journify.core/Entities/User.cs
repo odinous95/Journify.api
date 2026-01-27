@@ -1,6 +1,4 @@
-﻿using Journify.Core.Enums;
-
-namespace Journify.core.Entities
+﻿namespace Journify.core.Entities
 {
     public class User
     {
@@ -8,8 +6,16 @@ namespace Journify.core.Entities
         public string ExternalIdentifyProvider { get; private set; } = "";
         public string Username { get; private set; } = "";
         public string Email { get; private set; } = "";
-        public UserRole Role { get; private set; } = UserRole.User;
+        public string Role { get; private set; } = "";
         public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
         public ICollection<DailyJourney> Journeys { get; private set; } = new List<DailyJourney>();
+        private User() { }
+        public User(string externalIdentifyProvider, string username, string email, string role)
+        {
+            ExternalIdentifyProvider = externalIdentifyProvider;
+            Username = username;
+            Email = email;
+            Role = role;
+        }
     }
 }
