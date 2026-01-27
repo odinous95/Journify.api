@@ -1,9 +1,9 @@
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using ShareLib.SharedExtension;
-using ShareLib.SharedMiddlewares;
 using UserManagment.api.Middlewares;
 using UserManagment.infrastructure.Data;
+using UserManagment.infrastructure.Providers;
 using UserManagment.infrastructure.Repository;
 using UserManagment.service.Interfaces;
 using UserManagment.service.usecases;
@@ -18,10 +18,10 @@ builder.Services.AddControllers();
 // Register Repositories and Services
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserServices>();
-builder.Services.AddScoped<IJwtService, JwtService>();
-
-// Add JWT Authentication extension method
+builder.Services.AddScoped<IAuthenticatedUserProvider, JwtAuthenticatedUserProvider>();
 builder.Services.AddJwtAuthentication();
+builder.Services.AddHttpContextAccessor();
+
 // Add Dev Database                   
 var connectionString = Environment.GetEnvironmentVariable("PostgreSqlConnection");
 // Add DbContext
@@ -45,7 +45,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseMiddleware<RestrictAccessMiddleware>();
+//app.UseMiddleware<RestrictAccessMiddleware>();
 app.MapControllers();
 
 app.Run();
