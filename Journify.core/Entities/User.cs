@@ -1,13 +1,15 @@
-﻿namespace Journify.core.Entities
+﻿using Journify.Core.Enums;
+
+namespace Journify.core.Entities
 {
     public class User
     {
         public Guid Id { get; set; } = Guid.NewGuid();
-        public string Username { get; set; } = "";
-        public string Email { get; set; } = "";
-        public string PasswordHash { get; set; } = "";
-        public string Role { get; set; } = "";
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public ICollection<DailyJourney> Journeys { get; set; } = new List<DailyJourney>();
+        public string ExternalIdentifyProvider { get; private set; } = "";
+        public string Username { get; private set; } = "";
+        public string Email { get; private set; } = "";
+        public UserRole Role { get; private set; } = UserRole.User;
+        public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
+        public ICollection<DailyJourney> Journeys { get; private set; } = new List<DailyJourney>();
     }
 }
