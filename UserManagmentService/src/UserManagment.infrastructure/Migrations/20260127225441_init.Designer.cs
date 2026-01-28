@@ -12,7 +12,7 @@ using UserManagment.infrastructure.Data;
 namespace UserManagment.infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260126095029_init")]
+    [Migration("20260127225441_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -94,7 +94,7 @@ namespace UserManagment.infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("ExternalIdentifyProvider")
                         .IsRequired()
                         .HasColumnType("text");
 

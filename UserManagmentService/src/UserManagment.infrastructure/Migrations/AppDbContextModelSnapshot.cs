@@ -91,7 +91,7 @@ namespace UserManagment.infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("ExternalIdentifyProvider")
                         .IsRequired()
                         .HasColumnType("text");
 

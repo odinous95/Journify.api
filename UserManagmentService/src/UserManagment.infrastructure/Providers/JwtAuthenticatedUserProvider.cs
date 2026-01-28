@@ -15,16 +15,26 @@ namespace UserManagment.infrastructure.Providers
         public AuthenticatedUserDto GetCurrentUser()
         {
             var httpContext = _httpContextAccessor.HttpContext ?? throw new UnauthorizedAccessException("HTTP context is not available.");
-
+            Console.WriteLine(httpContext);
             var user = httpContext.User;
-            if (!user.Identity?.IsAuthenticated ?? true)
-            {
-                throw new UnauthorizedAccessException("User is not authenticated.");
-            }
-            if (user.Identity?.IsAuthenticated ?? true)
+            Console.WriteLine(user);
+            var identity = user.Identity;
+
+            if (identity == null)
             {
                 throw new UnauthorizedAccessException("User identity is not available.");
             }
+
+            if (!identity.IsAuthenticated)
+            {
+                throw new UnauthorizedAccessException("User is not authenticated.");
+            }
+
+            foreach (var claim in user.Claims)
+            {
+                Console.WriteLine($"{claim.Type} = {claim.Value}");
+            }
+
             var externalIdentityId = user.FindFirst("sub")?.Value ?? throw new UnauthorizedAccessException("User external identity ID is not available.");
             var email = user.FindFirst("email")?.Value ?? string.Empty;
             var name = user.FindFirst("name")?.Value ?? string.Empty;
