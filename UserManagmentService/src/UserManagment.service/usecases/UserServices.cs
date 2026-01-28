@@ -22,8 +22,7 @@ namespace UserManagment.service.usecases
             var newUser = new User(
                 command.ExternalIdentifyProvider,
                 command.Username,
-                command.Email,
-                command.Role
+                command.Email
             );
             await _userRepository.CreateUserAsync(newUser);
             return newUser;

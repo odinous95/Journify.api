@@ -5,14 +5,12 @@
         public string ExternalIdentifyProvider { get; }
         public string Email { get; }
         public string Username { get; }
-        public string Role { get; set; } = "User";
 
-        public UserCommand(string externalIdentifyProvider, string email, string username, string role)
+        public UserCommand(string externalIdentifyProvider, string email, string username)
         {
             ExternalIdentifyProvider = externalIdentifyProvider;
             Email = email;
             Username = username;
-            Role = role;
         }
     }
 
