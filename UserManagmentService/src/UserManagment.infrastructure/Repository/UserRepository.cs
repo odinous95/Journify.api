@@ -20,6 +20,12 @@ namespace UserManagment.infrastructure.Repository
         {
             return await _appDbcontext.Users.ToListAsync();
         }
+        public async Task<Guid> GetUserByAuthSubAsync(string authSub)
+        {
+            var user = await _appDbcontext.Users
+                .FirstOrDefaultAsync(u => u.AuthSub == authSub);
+            return user != null ? user.Id : Guid.Empty;
+        }
 
         public async Task<User?> GetUserByIdAsync(Guid id)
         {
