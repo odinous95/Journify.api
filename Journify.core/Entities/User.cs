@@ -2,20 +2,28 @@
 {
     public class User
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public string ExternalIdentifyProvider { get; private set; } = "";
-        public string Username { get; private set; } = "";
-        public string Email { get; private set; } = "";
-        public string Role { get; private set; } = "";
-        public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
-        public ICollection<DailyJourney> Journeys { get; private set; } = new List<DailyJourney>();
+        public Guid Id { get; private set; } = default!;
+        public string AuthSub { get; private set; } = default!;
+        public string Username { get; private set; } = default!;
+        public string Email { get; private set; } = default!;
+        public bool EmailVerified { get; private set; } = false;
+        public string Role { get; private set; } = "user";
+        public DateTime CreatedAt { get; private set; }
+
+
         private User() { }
-        public User(string externalIdentifyProvider, string username, string email, string role)
+
+        private User(string authSub, string email, string username, bool emailVerified)
         {
-            ExternalIdentifyProvider = externalIdentifyProvider;
-            Username = username;
+            Id = Guid.NewGuid();
+            AuthSub = authSub;
             Email = email;
-            Role = role;
+            Username = username;
+            EmailVerified = emailVerified;
+            CreatedAt = DateTime.UtcNow;
         }
+
+        public static User Create(string authSub, string email, string username, bool emailVerified)
+            => new(authSub, email, username, emailVerified);
     }
 }
