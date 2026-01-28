@@ -6,14 +6,13 @@ using UserManagment.service.Interfaces;
 
 namespace UserManagment.api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController(IUserService userService) : Controller
     {
         private readonly IUserService _userService = userService;
 
-        [Authorize]
         [HttpGet("ping")]
         public IActionResult Ping()
         {
@@ -32,5 +31,7 @@ namespace UserManagment.api.Controllers
             var result = await _userService.CreateUser(command);
             return Ok(result);
         }
+
+
     }
 }
