@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 using UserManagment.service.Interfaces;
 using UserManagment.Service.DTOs;
 
@@ -38,12 +37,10 @@ namespace UserManagment.infrastructure.Providers
             var externalIdentityId = user.FindFirst("sub")?.Value ?? throw new UnauthorizedAccessException("User external identity ID is not available.");
             var email = user.FindFirst("email")?.Value ?? string.Empty;
             var name = user.FindFirst("name")?.Value ?? string.Empty;
-            var role = user.FindFirst(ClaimTypes.Role)?.Value ?? user.FindFirst("roles")?.Value ?? "User";
             return new AuthenticatedUserDto(
                externalIdentityId,
                email,
-               name,
-               role
+               name
             );
         }
     }
