@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UserManagment.api.DTOS;
 using UserManagment.service.commands;
 using UserManagment.service.Interfaces;
 
@@ -8,43 +9,28 @@ namespace UserManagment.api.Controllers
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : Controller
+    public class UserController(IUserService userService) : Controller
     {
-        private readonly IUserService _userService;
-        private readonly IAuthenticatedUserProvider _authenticatedUserProvider;
-        public UserController(IUserService userService, IAuthenticatedUserProvider authenticatedUserProvider)
-        {
-            _userService = userService;
-            _authenticatedUserProvider = authenticatedUserProvider;
-        }
+        private readonly IUserService _userService = userService;
 
-        [HttpGet("ping")]
-        public ActionResult Ping()
-        {
-            return Ok("User Service is alive");
-        }
         [Authorize]
-        [HttpGet("secure")]
-        public ActionResult Secure()
+        [HttpGet("ping")]
+        public IActionResult Ping()
         {
-            Console.WriteLine(User);
-
-            return Ok("Claims logged");
+            return Ok(new
+            {
+                message = "Authorized",
+                claims = User.Claims.Select(c => new { c.Type, c.Value })
+            });
         }
 
-
-        [HttpGet("profile")]
-        public async Task<ActionResult> GetUserProfileOrCreate()
+        [HttpPost]
+        [Route("provision-user")]
+        public async Task<ActionResult> CreateUser([FromBody] AuthenticatedUserDTO request)
         {
-            var userProvided = _authenticatedUserProvider.GetCurrentUser();
-            var command = new UserCommand(
-                userProvided.ExternalIdentityId,
-                userProvided.Name,
-                userProvided.Email
-            );
-
-            var user = await _userService.GetUserProfileOrCreateAsync(command);
-            return Ok(user);
+            var command = new ProvisionUserCommand(request.Sub, request.Name, request.Email, request.EmailVerified);
+            var result = await _userService.CreateUser(command);
+            return Ok(result);
         }
     }
 }
