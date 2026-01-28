@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using ShareLib.SharedExtension;
 using UserManagment.api.Middlewares;
 using UserManagment.infrastructure.Data;
-using UserManagment.infrastructure.Providers;
 using UserManagment.infrastructure.Repository;
 using UserManagment.service.Interfaces;
 using UserManagment.service.usecases;
@@ -16,7 +15,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserService, UserServices>();
-builder.Services.AddScoped<IAuthenticatedUserProvider, JwtAuthenticatedUserProvider>();
 builder.Services.AddJwtAuthentication();
 builder.Services.AddHttpContextAccessor();
 
