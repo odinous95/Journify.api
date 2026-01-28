@@ -13,6 +13,7 @@ Env.Load();
 var builder = WebApplication.CreateBuilder(args);
 
 
+builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 // Add services to the container.
 // Register Repositories and Services
