@@ -49,6 +49,13 @@ namespace StepManagment.infrastructure.Migrations
                             CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             JourneyName = "Morning Walk",
                             UserId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333333"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            JourneyName = "Evening Reflection",
+                            UserId = new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851")
                         });
                 });
 

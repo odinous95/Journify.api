@@ -53,15 +53,19 @@ namespace StepManagment.infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "DailyJournies",
                 columns: new[] { "Id", "CreatedAt", "JourneyName", "UserId" },
-                values: new object[] { new Guid("11111111-1111-1111-1111-111111111111"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Morning Walk", new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851") });
+                values: new object[,]
+                {
+                    { new Guid("11111111-1111-1111-1111-111111111111"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Morning Walk", new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851") },
+                    { new Guid("33333333-3333-3333-3333-333333333333"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Evening Reflection", new Guid("d290f1ee-6c54-4b01-90e6-d701748f0851") }
+                });
 
             migrationBuilder.InsertData(
                 table: "Steps",
                 columns: new[] { "Id", "CreatedAt", "DailyJourneyId", "Description", "IsCompleted", "LastUpdatedAt", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("f1e2d3c4-b5a6-4789-9012-3456789fedcb"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), new Guid("33333333-3333-3333-3333-333333333333"), "Reflect on your day and jot down your thoughts in your journal.", false, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Evening Reflection" },
-                    { new Guid("a1b2c3d4-e5f6-4789-9012-3456789abcde"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), new Guid("11111111-1111-1111-1111-111111111111"), "Start your day with a 10-minute meditation session.", false, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Morning Meditation" }
+                    { new Guid("a1b2c3d4-e5f6-4789-9012-3456789abcde"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), new Guid("11111111-1111-1111-1111-111111111111"), "Start your day with a 10-minute meditation session.", false, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Morning Meditation" },
+                    { new Guid("f1e2d3c4-b5a6-4789-9012-3456789fedcb"), new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), new Guid("33333333-3333-3333-3333-333333333333"), "Reflect on your day and jot down your thoughts in your journal.", false, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc), "Evening Reflection" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -5,33 +5,16 @@ using UserManagment.service.Interfaces;
 
 namespace UserManagment.infrastructure.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(AppDbContext appDbContext) : IUserRepository
     {
-        private readonly AppDbContext _appDbcontext;
-        public UserRepository(AppDbContext appDbContext)
-        {
-            _appDbcontext = appDbContext;
-        }
+        private readonly AppDbContext _appDbcontext = appDbContext;
 
-        public async Task<User?> GetUserByExternalIdAsync(string externalAuthId)
-        {
-            return await _appDbcontext.Users
-                .FirstOrDefaultAsync(u => u.ExternalIdentifyProvider == externalAuthId);
-        }
-
-
-
-
-        public async Task<User> CreateUserAsync(User user)
+        public async Task<Guid> CreateUserAsync(User user)
         {
             _appDbcontext.Users.Add(user);
             await _appDbcontext.SaveChangesAsync();
-            return user;
+            return user.Id;
         }
-
-
-
-
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
@@ -49,7 +32,5 @@ namespace UserManagment.infrastructure.Repository
             await _appDbcontext.SaveChangesAsync();
             return user;
         }
-
-
     }
 }
