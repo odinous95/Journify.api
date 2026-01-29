@@ -27,6 +27,7 @@ builder.Services.AddScoped<IStepRepository, StepRepository>();
 builder.Services.AddTransient<IStepService, StepService>();
 
 
+
 // Register Repositories and Services for Journeies
 builder.Services.AddScoped<IDailyJourneyRepository, DailyJourneyRepository>();
 builder.Services.AddTransient<IDailyJourneyService, DailyJourneyService>();
@@ -35,8 +36,7 @@ builder.Services.AddTransient<IDailyJourneyService, DailyJourneyService>();
 
 // Add authentication service
 builder.Services.AddJwtAuthentication();
-// Register Swagger generator (required for ISwaggerProvider)
-builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -52,10 +52,12 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
-// authentication & authorization middlewares
-app.UseAuthorization();
 // custom middleware to restrict access based on criteria(api gateway)
 app.UseMiddleware<RestrictAccessMiddleware>();
+
+// Ensure auth order: Authentication then Authorization
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
