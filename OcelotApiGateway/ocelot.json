@@ -49,7 +49,7 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/user/register",
+      "DownstreamPathTemplate": "/api/user/provision",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -57,11 +57,11 @@
           "Port": 8081
         }
       ],
-      "UpstreamPathTemplate": "/user/register",
+      "UpstreamPathTemplate": "/user/provision",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/user/login",
+      "DownstreamPathTemplate": "/api/user/ping",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -69,20 +69,8 @@
           "Port": 8081
         }
       ],
-      "UpstreamPathTemplate": "/user/login",
-      "UpstreamHttpMethod": [ "POST" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/user/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "user-service",
-          "Port": 8081
-        }
-      ],
-      "UpstreamPathTemplate": "/user/{everything}",
-      "UpstreamHttpMethod": [ "GET", "PUT", "DELETE" ]
+      "UpstreamPathTemplate": "/user/ping",
+      "UpstreamHttpMethod": [ "GET" ]
     }
   ],
   "GlobalConfiguration": {
