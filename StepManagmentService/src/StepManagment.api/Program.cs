@@ -12,30 +12,24 @@ using StepManagment.service.usecases;
 
 Env.Load();
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
-// Add services to the container.
-
-// Add Dev Database                   
 var connectionString = Environment.GetEnvironmentVariable("PostgreSqlConnection");
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
 
+builder.Services.AddControllers();
 
+builder.Services.AddJwtAuthentication();
 // Register Repositories and Services for Steps
-builder.Services.AddScoped<IStepRepository, StepRepository>();
 builder.Services.AddTransient<IStepService, StepService>();
-
+builder.Services.AddScoped<IStepRepository, StepRepository>();
 
 
 // Register Repositories and Services for Journeies
-builder.Services.AddScoped<IDailyJourneyRepository, DailyJourneyRepository>();
 builder.Services.AddTransient<IDailyJourneyService, DailyJourneyService>();
+builder.Services.AddScoped<IDailyJourneyRepository, DailyJourneyRepository>();
 
 
-
-// Add authentication service
-builder.Services.AddJwtAuthentication();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 
 var app = builder.Build();
@@ -50,7 +44,6 @@ if (app.Environment.IsDevelopment())
 // middlewares 
 // global exception handling middleware
 app.UseMiddleware<ExceptionMiddleware>();
-
 app.UseHttpsRedirection();
 // custom middleware to restrict access based on criteria(api gateway)
 app.UseMiddleware<RestrictAccessMiddleware>();
